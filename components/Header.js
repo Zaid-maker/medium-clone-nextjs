@@ -8,6 +8,22 @@ import UploadModal from "./UploadModal";
 
 Modal.setAppElement("#__next");
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#fff",
+    padding: 0,
+    border: "none",
+  },
+  overlay: {
+    backgroundColor: "rgba(10, 11, 13, 0.75)",
+  },
+};
+
 const styles = {
   wrapper: `flex justify-center gap-10 p-5 bg-[#FCC017]`,
   content: `max-w-7xl flex-1 flex justify-between gap-10`,
@@ -42,11 +58,16 @@ const Header = () => {
               <Link href={"/?addNew=1"}>
                 <div className={styles.accentedButton}>Write</div>
               </Link>
+              <div className={styles.accentedButton}>
+                <div>Get unlimited access</div>
+              </div>
             </>
           ) : (
             <>
-              <div>Sign In</div>
-              <div className={styles.accentedButton}>Get Started</div>
+              <div onClick={handleUserAuth}>Sign In</div>
+              <div onClick={handleUserAuth} className={styles.accentedButton}>
+                <div>Get Started</div>
+              </div>
             </>
           )}
         </div>
@@ -54,6 +75,7 @@ const Header = () => {
       <Modal
         isOpen={!!router.query.addNew}
         onRequestClose={() => router.push("/")}
+        style={customStyles}
       >
         <UploadModal />
       </Modal>
