@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Modal from "react-modal";
 import { MediumContext } from "../context/MediumContext";
 import UploadModal from "./UploadModal";
+import Logo from "../static/logo.png";
 
 Modal.setAppElement("#__next");
 
@@ -42,13 +43,13 @@ const Header = () => {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.logoContainer}>
-          {/* <Image
+          <Image
             className={styles.logo}
             src={Logo}
             alt="logo"
             width={200}
             height={40}
-          /> */}
+          />
         </div>
         <div className={styles.bannerNav}>
           <div>Our Story</div>

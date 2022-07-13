@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { MediumContext } from "../context/MediumContext";
 import Image from "next/image";
+import Logo from "./../static/banner.png";
 
 const styles = {
   wrapper: `h-max-[10rem] flex items-center justify-center border-y border-black bg-[#FCC017]`,
@@ -32,13 +33,13 @@ const Banner = () => {
           )}
         </div>
 
-        {/* <Image
+        <Image
           className="hidden h-32 md:inline-flex object-contain flex-1"
           src={Logo.src}
           height={400}
           width={500}
           alt="logo"
-         /> */}
+        />
       </div>
     </div>
   );
