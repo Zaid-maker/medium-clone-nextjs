@@ -51,7 +51,7 @@ const Header = () => {
           /> */}
         </div>
         <div className={styles.bannerNav}>
-          <div>Our story</div>
+          <div>Our Story</div>
           <div>Membership</div>
           {user ? (
             <>

@@ -9,14 +9,14 @@ const styles = {
 };
 
 const Banner = () => {
-  const { user } = useContext(MediumContext);
+  const { user, handleUserAuth } = useContext(MediumContext);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className="space-y-5 px-10 flex-[3]">
           <h1 className="max-w-xl text-[6rem] font-mediumSerif">
-            Stay Curious
+            Stay Curious.
           </h1>
           <h3 className="text-2xl">
             Discover stories, thinking, and expertise from writers on any topic.
@@ -26,7 +26,9 @@ const Banner = () => {
               Get unlimited access
             </button>
           ) : (
-            <button className={styles.accentedButton}>Start Reading</button>
+            <button onClick={handleUserAuth} className={styles.accentedButton}>
+              Start Reading
+            </button>
           )}
         </div>
 

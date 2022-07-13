@@ -29,7 +29,9 @@ export default function Home() {
         <div className={styles.main}>
           <div className={styles.container}>
             <div className={styles.postsList}>
-              <PostCard />
+              {allPosts.map((post) => {
+                <PostCard post={post} key={post.id} />;
+              })}
             </div>
           </div>
         </div>

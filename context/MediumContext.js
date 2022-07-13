@@ -1,7 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { db, auth, provider } from "../firebase";
-import { collection, getDoc, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, getDocs } from "firebase/firestore";
 
 export const MediumContext = createContext();
 
