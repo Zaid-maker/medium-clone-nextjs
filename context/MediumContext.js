@@ -1,7 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { signInWithPopup } from "firebase/auth";
-import { db, auth, provider } from "../firebase";
-import { collection, setDoc, doc, getDocs } from "firebase/firestore";
+import { auth, provider } from "../firebase";
+import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export const MediumContext = createContext();
 
@@ -31,7 +32,7 @@ export const MediumProvider = ({ children }) => {
 
   useEffect(() => {
     const getAllPosts = async () => {
-      const querySnapshot = await getDocs(collection(db, "posts"));
+      const querySnapshot = await getDocs(collection(db, "articles"));
 
       setAllPosts(
         querySnapshot.docs.map((doc) => {
@@ -74,13 +75,13 @@ export const MediumProvider = ({ children }) => {
         saveUser(user);
       })
       .catch((error) => {
-        console.log(error.message);
+        console.error(error.message);
       });
   };
 
   return (
     <MediumContext.Provider
-      value={{ user, allPosts, allUsers, handleUserAuth }}
+      value={{ user, handleUserAuth, allPosts, allUsers }}
     >
       {children}
     </MediumContext.Provider>
