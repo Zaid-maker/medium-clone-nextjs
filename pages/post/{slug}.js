@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
 import { MediumContext } from "../../context/MediumContext";
-import HeadersNav from "../../components/HeadersNav";
+import ReadersNav from "../../components/ReadersNav";
 import ArticleMain from "../../components/ArticleMain";
 import Recommendations from "../../components/Recommendations";
 
@@ -37,7 +37,7 @@ const Post = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.content}>
-        <HeadersNav />
+        <ReadersNav />
         <ArticleMain post={post} author={author} />
         <Recommendations author={author} />
       </main>
