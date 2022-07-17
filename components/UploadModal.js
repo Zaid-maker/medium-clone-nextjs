@@ -26,6 +26,23 @@ const UploadModal = () => {
   const [bannerImage, setBannerImage] = useState("");
   const [body, setBody] = useState("");
 
+  const uploadPost = async (event) => {
+    event.preventDefault();
+
+    await addDoc(collection(db, "articles"), {
+      bannerImage: bannerImage,
+      body: body,
+      category: category,
+      brief: brief,
+      postedOn: serverTimestamp(),
+      postLength: Number(postLength),
+      title: title,
+      author: user.email,
+    });
+
+    router.push("/");
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>Upload a Post</div>
@@ -86,7 +103,7 @@ const UploadModal = () => {
           />
         </span>
       </div>
-      <div className={styles.largeField}>
+      <div className={styles.smallField}>
         <span className={styles.fieldTitle}>Article Text</span>
         <span className={styles.inputContainer}>
           <textarea
@@ -98,7 +115,9 @@ const UploadModal = () => {
         </span>
       </div>
 
-      <button className={styles.accentedButton}>Submit</button>
+      <button onClick={uploadPost} className={styles.accentedButton}>
+        Submit
+      </button>
     </div>
   );
 };
