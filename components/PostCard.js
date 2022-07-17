@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { FiBookmark } from "react-icons/fi";
 
 const styles = {
   wrapper: `max-w-[46rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer`,
@@ -20,6 +23,16 @@ const styles = {
 
 const PostCard = ({ post }) => {
   const [authorData, setAuthorData] = useState(null);
+
+  useEffect(() => {
+    const getAuthorData = async () => {
+      setAuthorData(
+        await (await getDoc(doc(db, "users", post.authorId))).data()
+      );
+    };
+
+    getAuthorData();
+  }, [post]);
 
   return (
     <Link href={`/post/${post.id}`}>
@@ -42,8 +55,26 @@ const PostCard = ({ post }) => {
           <h1 className={styles.title}>{post.data.title}</h1>
           <div className={styles.briefing}>{post.data.brief}</div>
           <div className={styles.detailsContainer}>
-            <span className={styles.articleDetails}></span>
+            <span className={styles.articleDetails}>
+              {new Date(post.data.postedOn).toLocaleString("en-US", {
+                day: "numeric",
+                month: "short",
+              })}
+              • {post.data.postLength} min read •{" "}
+              <span className={styles.category}>{post.data.category}</span>
+            </span>
+            <span className={styles.bookmarkContainer}>
+              <FiBookmark className="h-5 w-5" />
+            </span>
           </div>
+        </div>
+        <div className={styles.thumbnailContainer}>
+          <Image
+            src={`https://res.cloudinary.com/demo/image/fetch/${post.data.bannerImage}`}
+            alt="thumbnail"
+            height={100}
+            width={100}
+          />
         </div>
       </div>
     </Link>
